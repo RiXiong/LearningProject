@@ -27,5 +27,4 @@ public class SimpleControllerRevisitedTests {
                 .andExpect(content().contentType("text/plain"))
                 .andExpect(content().string("Hello world revisited!"));
     }
-
 }

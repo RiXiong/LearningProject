@@ -1,5 +1,7 @@
 package org.zrx.springframework.samples.mvc.messageconverters;
 
+import com.rometools.rome.feed.atom.Feed;
+import com.rometools.rome.feed.rss.Channel;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -67,7 +69,34 @@ public class MessageConvertersController {
         return new JavaBean("bar", "apple");
     }
 
+
     // AtomFeedHttpMessageConverter (requires Rome on the classpath - useful for serving Atom feeds)
+    // AtomFeedHttpMessageConverter 原子性订阅消息转换
+    // 参考：http://www.metsky.com/archives/361.html
+    public @ResponseBody String readFeed(@RequestBody Feed feed) {
+        return "读 订阅摘要标题: " + feed.getTitle();
+    }
 
+    @RequestMapping(value = "/atom", method = RequestMethod.GET)
+    public @ResponseBody Feed writeFeed() {
+        Feed feed = new Feed();
+        feed.setFeedType("atom_1.0");
+        feed.setTitle("My Atom feed");
+        return feed;
+    }
 
+    // RssChannelHttpMessageConverter (requires Rome on the classpath - useful for serving RSS feeds)
+    @RequestMapping(value = "/rss", method = RequestMethod.POST)
+    public @ResponseBody String readChannel(@RequestBody Channel channel) {
+        return "读取订阅标题：" + channel.getTitle();
+    }
+
+    @RequestMapping(value = "/rss", method = RequestMethod.GET)
+    public @ResponseBody Channel writeChannel() {
+        Channel channel = new Channel();
+        channel.setFeedType("rss_2.0");
+        channel.setTitle("My RSS feed标题");
+        channel.setDescription("描述");
+        return channel;
+    }
 }

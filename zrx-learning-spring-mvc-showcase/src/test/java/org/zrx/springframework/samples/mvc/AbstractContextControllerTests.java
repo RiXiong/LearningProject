@@ -9,9 +9,9 @@ import org.springframework.web.context.WebApplicationContext;
  * Function:    测试用例抽象类，加载spring 上下文配置 servlet-context.xml
  * Author:      zhangrixiong
  * DateTime:    2016/8/22 23:22
+ *
+ * 配置  spring 应用上下文
  */
-
-// 配置  spring 应用上下文
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml")
 public class AbstractContextControllerTests {

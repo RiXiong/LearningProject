@@ -34,5 +34,4 @@ public class ValidationControllerTests {
         this.mockMvc.perform(get("/validate?number=3&date=2010-07-01"))
                 .andExpect(content().string("Object has validation errors"));
     }
-
 }
