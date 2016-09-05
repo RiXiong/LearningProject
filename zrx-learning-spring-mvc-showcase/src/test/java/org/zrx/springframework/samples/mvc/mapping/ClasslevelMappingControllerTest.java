@@ -1,5 +1,6 @@
 package org.zrx.springframework.samples.mvc.mapping;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,9 +8,14 @@ import static org.junit.Assert.*;
 /**
  * Fynction:    R on 2016/9/5.
  * Author:      zhangrixiong
- * DateTime:    2016/9/5 21:51
+ * DateTime:    2016/9/5 21:50
  */
-public class MappingControllerTest {
+public class ClasslevelMappingControllerTest {
+    @Before
+    public void setUp() throws Exception {
+
+    }
+
     @Test
     public void byPath() throws Exception {
 
@@ -51,12 +57,7 @@ public class MappingControllerTest {
     }
 
     @Test
-    public void byProducesJson() throws Exception {
-
-    }
-
-    @Test
-    public void byProducesXml() throws Exception {
+    public void byProduces() throws Exception {
 
     }
 

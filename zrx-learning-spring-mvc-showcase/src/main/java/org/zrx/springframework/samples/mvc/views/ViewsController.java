@@ -21,7 +21,7 @@ public class ViewsController {
     public String prepare(Model model){
         model.addAttribute("foo", "bar");
         model.addAttribute("fruit", "apple");
-        return "view/html";
+        return "views/html";
     }
 
     @RequestMapping(value = "/viewName", method=RequestMethod.GET)

@@ -5,6 +5,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+
 /**
  * Function:    测试用例抽象类，加载spring 上下文配置 servlet-context.xml
  * Author:      zhangrixiong

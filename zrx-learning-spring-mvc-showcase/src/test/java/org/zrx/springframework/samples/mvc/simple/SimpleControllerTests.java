@@ -1,7 +1,7 @@
 package org.zrx.springframework.samples.mvc.simple;
 
 import org.junit.Test;
-
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

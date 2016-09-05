@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <!-- The definition of the Root Spring Container shared by all Servlets and Filters 共有的配置 -->
+    <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/root-context.xml</param-value>
@@ -13,7 +13,7 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!--  csrfFilter 是spring security 的一部分 -->
+
     <filter>
         <filter-name>csrfFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -24,7 +24,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- Processes application requests ，著名的 DispatcherServlet -->
+    <!-- Processes application requests -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -41,7 +41,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- Disables Servlet Container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0  想写一个REST 服务 一般是json 交互，并不需要welcome 页面-->
+    <!-- Disables Servlet Container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
     <welcome-file-list>
         <welcome-file></welcome-file>
     </welcome-file-list>

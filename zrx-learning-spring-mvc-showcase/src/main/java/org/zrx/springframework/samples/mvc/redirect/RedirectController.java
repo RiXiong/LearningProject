@@ -22,8 +22,8 @@ import javax.inject.Inject;
 @RequestMapping("/redirect")
 public class RedirectController {
 
-    // spring 核心类 控制反转
     private final ConversionService conversionService;
+
 
     // @Inject 根据类型自动装配 构造函数注解
     @Inject
@@ -33,8 +33,8 @@ public class RedirectController {
 
     @RequestMapping(value = "/urilTemplate", method = RequestMethod.GET)
     public String uriTemplate(RedirectAttributes redirectAttrs) {
-        redirectAttrs.addAttribute("account", "a123");
-        redirectAttrs.addAttribute("data", new LocalDate(2011,12,31));
+        redirectAttrs.addAttribute("account", "a123");  // Used as URI template variable
+        redirectAttrs.addAttribute("date", new LocalDate(2011, 12, 31));  // Appended as a query parameter
         return "redirect:/redirect/{account}";
     }
 

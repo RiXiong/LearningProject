@@ -21,25 +21,26 @@ public class MessageConvertersController {
 
     // StringHttpMessageConverter
 
-    public String readString(@RequestBody String string) {
-        return "读一个String'" + string + "'";
+    @RequestMapping(value="/string", method=RequestMethod.POST)
+    public @ResponseBody String readString(@RequestBody String string) {
+        return "Read string '" + string + "'";
     }
 
-    @RequestMapping(value = "/string", method = RequestMethod.GET)
+    @RequestMapping(value="/string", method=RequestMethod.GET)
     public @ResponseBody String writeString() {
-        return "写一个String";
+        return "Wrote a string";
     }
 
     // Form encoded data (application/x-www-form-urlencoded)
 
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String readForm(@ModelAttribute JavaBean bean) {
+    @RequestMapping(value="/form", method=RequestMethod.POST)
+    public @ResponseBody String readForm(@ModelAttribute JavaBean bean) {
         return "Read x-www-form-urlencoded: " + bean;
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public @ResponseBody  MultiValueMap<String, String> writeForm() {
-        MultiValueMap<String,String> map = new LinkedMultiValueMap<String, String>();
+    @RequestMapping(value="/form", method=RequestMethod.GET)
+    public @ResponseBody MultiValueMap<String, String> writeForm() {
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("foo", "bar");
         map.add("fruit", "apple");
         return map;
@@ -47,7 +48,7 @@ public class MessageConvertersController {
 
     // Jaxb2RootElementHttpMessageConverter (requires JAXB2 on the classpath - useful for serving clients that expect to work with XML)
 
-    @RequestMapping(value = "/xml", method = RequestMethod.POST)
+    @RequestMapping(value="/xml", method=RequestMethod.POST)
     public @ResponseBody String readXml(@RequestBody JavaBean bean) {
         return "Read from XML: " + bean;
     }
@@ -69,15 +70,14 @@ public class MessageConvertersController {
         return new JavaBean("bar", "apple");
     }
 
-
     // AtomFeedHttpMessageConverter (requires Rome on the classpath - useful for serving Atom feeds)
-    // AtomFeedHttpMessageConverter 原子性订阅消息转换
-    // 参考：http://www.metsky.com/archives/361.html
+
+    @RequestMapping(value="/atom", method=RequestMethod.POST)
     public @ResponseBody String readFeed(@RequestBody Feed feed) {
-        return "读 订阅摘要标题: " + feed.getTitle();
+        return "Read " + feed.getTitle();
     }
 
-    @RequestMapping(value = "/atom", method = RequestMethod.GET)
+    @RequestMapping(value="/atom", method=RequestMethod.GET)
     public @ResponseBody Feed writeFeed() {
         Feed feed = new Feed();
         feed.setFeedType("atom_1.0");
@@ -86,17 +86,19 @@ public class MessageConvertersController {
     }
 
     // RssChannelHttpMessageConverter (requires Rome on the classpath - useful for serving RSS feeds)
-    @RequestMapping(value = "/rss", method = RequestMethod.POST)
+
+    @RequestMapping(value="/rss", method=RequestMethod.POST)
     public @ResponseBody String readChannel(@RequestBody Channel channel) {
-        return "读取订阅标题：" + channel.getTitle();
+        return "Read " + channel.getTitle();
     }
 
-    @RequestMapping(value = "/rss", method = RequestMethod.GET)
+    @RequestMapping(value="/rss", method=RequestMethod.GET)
     public @ResponseBody Channel writeChannel() {
         Channel channel = new Channel();
         channel.setFeedType("rss_2.0");
-        channel.setTitle("My RSS feed标题");
-        channel.setDescription("描述");
+        channel.setTitle("My RSS feed");
+        channel.setDescription("Description");
+        channel.setLink("http://localhost:8080/mvc-showcase/rss");
         return channel;
     }
 }

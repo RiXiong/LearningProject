@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.nio.charset.Charset;
 
@@ -13,17 +12,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+
 /**
- * Function:    ResponseControllerTests
+ * Fynction:    R on 2016/9/5.
  * Author:      zhangrixiong
- * DateTime:    2016/8/23 15:38
+ * DateTime:    2016/9/5 21:52
  */
-public class ResponseControllerTests {
+public class ResponseControllerTest {
 
     private MockMvc mockMvc;
 
     @Before
-    public void setup() throws Exception {
+    public void setUp() throws Exception {
         this.mockMvc = standaloneSetup(new ResponseController()).build();
     }
 
@@ -34,9 +34,8 @@ public class ResponseControllerTests {
                 .andExpect(content().string("The String ResponseBody"));
     }
 
-
     @Test
-    public void responseCharsetAccept() throws Exception {
+    public void responseAcceptHeaderCharset() throws Exception {
         this.mockMvc.perform(
                 get("/response/charset/accept")
                         .accept(new MediaType("text", "plain", Charset.forName("UTF-8"))))
@@ -46,24 +45,27 @@ public class ResponseControllerTests {
     }
 
     @Test
-    public void responseCharsetProduce() throws Exception {
+    public void responseProducesConditionCharset() throws Exception {
         this.mockMvc.perform(get("/response/charset/produce"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(""));
+                .andExpect(content().string(
+                        "\u3053\u3093\u306b\u3061\u306f\u4e16\u754c\uff01 (\"Hello world!\" in Japanese)"));
     }
 
     @Test
-    public void responseEntityStatus() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/response/entity/status"))
+    public void responseEntityStatusCode() throws Exception {
+        this.mockMvc.perform(get("/response/entity/status"))
                 .andExpect(status().isForbidden())
                 .andExpect(content().string(
-                    "The String ResponseBody with custom header Content-Type=text/plain"));
+                        "The String ResponseBody with custom status code(403 Forbidden)"));
     }
 
     @Test
-    public void responseEntityHeader() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/response/entity/headers"))
-                .andExpect(status().isOk()).andExpect(content().string(
-                    "The String ResponseBody with custom header Content-Type=text/plain"));
+    public void responseEntityCustomHeaders() throws Exception {
+        this.mockMvc.perform(get("/response/entity/headers"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        "The String ResponseBody with custom header Content-Type=text/plain"));
     }
+
 }

@@ -10,27 +10,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 /**
- * Function:    ValidationControllerTests
+ * Fynction:    R on 2016/9/5.
  * Author:      zhangrixiong
- * DateTime:    2016/8/23 15:08
+ * DateTime:    2016/9/5 21:52
  */
-public class ValidationControllerTests {
+public class ValidationControllerTest {
 
     private MockMvc mockMvc;
 
     @Before
-    public void setup() throws Exception {
+    public void setUp() throws Exception {
         this.mockMvc = standaloneSetup(new ValidationController()).alwaysExpect(status().isOk()).build();
     }
 
+    /**
+     * test<MethodUnderTest>_<state>
+     *
+     * @throws Exception
+     */
     @Test
-    public void validateSuccess() throws Exception {
+    public void validate_Success() throws Exception {
         this.mockMvc.perform(get("/validate?number=3&date=2029-07-04"))
                 .andExpect(content().string("No errors"));
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
-    public void validateErrors() throws Exception {
+    public void validate_Errors() throws Exception {
         this.mockMvc.perform(get("/validate?number=3&date=2010-07-01"))
                 .andExpect(content().string("Object has validation errors"));
     }
