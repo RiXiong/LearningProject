@@ -1,0 +1,7 @@
+{
+  "name": "apiDoc 例子",
+  "version": "0.0.1",
+  "description": "这是一个api的基本描述",
+  "title": "一般的api浏览标题",
+  "url" : "https://api.github.com/v1"
+}

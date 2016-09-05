@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>LearningProject</groupId>
+        <artifactId>LearningProject</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>LearningProject</groupId>
+    <artifactId>zrx-rpc-thrift-parent</artifactId>
+    <name>zrx-learning-rpx-thrift-parent</name>
+    <packaging>pom</packaging>
+
+    <!-- modual as dir name  排除 knowledge 模块 -->
+    <modules>
+        
+    </modules>
+
+</project>

@@ -1,0 +1,11 @@
+{
+  "name": "测试",
+  "version": "0.0.1",
+  "description": "API文档测试",
+  "title": "API文档测试",
+  "url" : "http://xxxxxxx",
+  "sampleUrl" : "http://xxxxxxxx",
+  "template":{
+    "forceLanguage":"zh-cn"
+  }
+}
