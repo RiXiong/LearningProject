@@ -21,7 +21,9 @@
     <modules>
         <!--<module>../zrx-learning-springboot-demo</module>-->
         <module>../zrx-learning-spring-mvc-showcase</module>
-        <module>../zrx-learning-redis-demo</module>
+        <module>../zrx-learning-redis-parent</module>
+        <module>../zrx-learning-rpc-thrift-parent</module>
+        <module>../zrx-learning-bigdata-parent</module>
     </modules>
 
 </project>

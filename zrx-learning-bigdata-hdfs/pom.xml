@@ -9,7 +9,7 @@
 		<groupId>LearningProject</groupId>
 		<artifactId>learning-bigdata-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../zrx-learning-bigdata-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>LearningProject</groupId>
@@ -17,8 +17,6 @@
     <name>zrx-learning-bigdata-hdfs</name>
     <packaging>pom</packaging>
 
-    <modules>
-	
-	</modules>
+
 
 </project>

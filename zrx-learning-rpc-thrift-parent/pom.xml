@@ -7,9 +7,9 @@
 
     <parent>
         <groupId>LearningProject</groupId>
-        <artifactId>LearningProject</artifactId>
+        <artifactId>learning-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../zrx-learning-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>LearningProject</groupId>
