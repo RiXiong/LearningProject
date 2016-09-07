@@ -23,20 +23,22 @@ import javax.validation.Valid;
 @SessionAttributes("formBean")  // 从 session 中获取回话信息 formBean (反射获取)
 public class FormController {
 
-    // 没一个请求 都调用该方法
+    // Invoked on every request
+
     @ModelAttribute
     public void ajaxAttribute(WebRequest request, Model model) {
         model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
     }
 
-    // 初始化时，被调用 创建 "form" 属性
-    // 创建表单信息 "form" 放到 http session 中
+    // Invoked initially to create the "form" attribute
+    // Once created the "form" attribute comes from the HTTP session (see @SessionAttributes)
+
     @ModelAttribute("formBean")
     public FormBean createFormBean() {
         return new FormBean();
     }
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET)
     public void form() {
     }
 
@@ -44,22 +46,22 @@ public class FormController {
     public String processSubmit(@Valid FormBean formBean, BindingResult result,
                                 @ModelAttribute("ajaxRequest") boolean ajaxRequest,
                                 Model model, RedirectAttributes redirectAttrs) {
-
-        if(result.hasErrors()) {
-             return null;
+        if (result.hasErrors()) {
+            return null;
         }
-        // 经典的例子： 这里会做一些保存表单数据到 db 的操作 以及从session清除 "form" 中的数据属性
-        // 例如：SessionStatus.setCompleted() . 在这个例子中，我们还会保存 "form"信息到session中
-        String message = "表单提交成功. ";
-        // 成功请求
+        // Typically you would save to a db and clear the "form" attribute from the session
+        // via SessionStatus.setCompleted(). For the demo we leave it in the session.
+        String message = "Form submitted successfully.  Bound " + formBean;
+        // Success response handling
         if (ajaxRequest) {
-            // 把本次请求的数据呈现 到 客户端
+            // prepare model for rendering success message in this request
             model.addAttribute("message", message);
             return null;
         } else {
-            // 保存成功的信息 通过重定向把数据带到下一个请求中
-            redirectAttrs.addFlashAttribute("message",message);
-            return  "redirect:/form";
+            // store a success message for rendering on the next request after redirect
+            // redirect back to the form to render the success message along with newly bound values
+            redirectAttrs.addFlashAttribute("message", message);
+            return "redirect:/form";
         }
     }
 }
