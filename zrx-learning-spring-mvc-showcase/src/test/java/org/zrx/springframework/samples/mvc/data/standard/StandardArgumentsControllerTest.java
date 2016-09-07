@@ -1,9 +1,17 @@
 package org.zrx.springframework.samples.mvc.data.standard;
 
+import static org.hamcrest.Matchers.startsWith;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.*;
 
 /**
  * Fynction:    R on 2016/9/5.
@@ -11,44 +19,61 @@ import static org.junit.Assert.*;
  * DateTime:    2016/9/5 21:47
  */
 public class StandardArgumentsControllerTest {
-    @Before
-    public void setUp() throws Exception {
+    private MockMvc mockMvc;
 
+    @Before
+    public void setup() throws Exception {
+        this.mockMvc = standaloneSetup(new StandardArgumentsController()).alwaysExpect(status().isOk()).build();
     }
 
     @Test
-    public void standardRequestArgs() throws Exception {
-
+    public void request() throws Exception {
+        this.mockMvc.perform(get("/data/standard/request"))
+                .andExpect(content().string(startsWith(
+                        "request = org.springframework.mock.web.MockHttpServletRequest@")));
     }
 
     @Test
     public void requestReader() throws Exception {
-
+        this.mockMvc.perform(
+                post("/data/standard/request/reader")
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content("foo".getBytes()))
+                .andExpect(content().string("Read char request body = foo"));
     }
 
     @Test
-    public void requestReader1() throws Exception {
-
+    public void requestIs() throws Exception {
+        this.mockMvc.perform(
+                post("/data/standard/request/is")
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .content("foo".getBytes()))
+                .andExpect(content().string("Read binary request body = foo"));
     }
 
     @Test
     public void response() throws Exception {
-
+        this.mockMvc.perform(get("/data/standard/response"))
+                .andExpect(content().string(startsWith(
+                        "response = org.springframework.mock.web.MockHttpServletResponse@")));
     }
 
     @Test
-    public void availableStandardResponseArguments() throws Exception {
-
+    public void writer() throws Exception {
+        this.mockMvc.perform(get("/data/standard/response/writer"))
+                .andExpect(content().string("Wrote char response using Writer"));
     }
 
     @Test
-    public void availableStandardResponseArguments1() throws Exception {
-
+    public void os() throws Exception {
+        this.mockMvc.perform(get("/data/standard/response/os"))
+                .andExpect(content().string("Wrote binary response using OutputStream"));
     }
 
     @Test
     public void session() throws Exception {
-
+        this.mockMvc.perform(get("/data/standard/session"))
+                .andExpect(content().string(startsWith(
+                        "session=org.springframework.mock.web.MockHttpSession@")));
     }
-
 }

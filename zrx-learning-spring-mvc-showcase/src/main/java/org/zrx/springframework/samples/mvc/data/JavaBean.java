@@ -6,6 +6,7 @@ package org.zrx.springframework.samples.mvc.data;
  * DateTime:    2016/8/22 17:46
  */
 public class JavaBean {
+
     private String param1;
 
     private String param2;
@@ -35,4 +36,5 @@ public class JavaBean {
     public void setParam3(String param3) {
         this.param3 = param3;
     }
+
 }
