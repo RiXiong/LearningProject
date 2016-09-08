@@ -20,7 +20,7 @@ public class ResponseController {
 
     @RequestMapping("/annotation")
     public @ResponseBody String responseBody() {
-        return "这是一个 String 响应ResponseBody ---  格式 ";
+        return "The String ResponseBody";
     }
 
     @RequestMapping("/charset/accept")

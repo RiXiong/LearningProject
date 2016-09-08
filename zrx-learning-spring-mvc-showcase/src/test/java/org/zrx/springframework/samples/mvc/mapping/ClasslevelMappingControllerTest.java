@@ -18,10 +18,10 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 /**
  * Fynction:    R on 2016/9/5.
  * Author:      zhangrixiong
- * DateTime:    2016/9/5 21:51
+ * DateTime:    2016/9/5 21:50
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MappingControllerTest extends AbstractContextControllerTests {
+public class ClasslevelMappingControllerTest extends AbstractContextControllerTests {
 
     private MockMvc mockMvc;
 
@@ -32,64 +32,65 @@ public class MappingControllerTest extends AbstractContextControllerTests {
 
     @Test
     public void byPath() throws Exception {
-        this.mockMvc.perform(get("/mapping/path")).andExpect(content().string("Mapped by path!"));
+        this.mockMvc.perform(get("/class-mapping/path"))
+                .andExpect(content().string("class-mapping by path!"));
     }
 
     @Test
     public void byPathPattern() throws Exception {
-        this.mockMvc.perform(get("/mapping/path/wildcard"))
-                .andExpect(content().string("Mapped by path pattern ('/mapping/path/wildcard')"));
+        this.mockMvc.perform(get("/class-mapping/path/wildcard"))
+                .andExpect(content().string("class-mapping by path pattern ('/class-mapping/path/wildcard')"));
     }
 
     @Test
     public void byMethod() throws Exception {
-        this.mockMvc.perform(get("/mapping/method"))
-                .andExpect(content().string("Mapped by path + method"));
+        this.mockMvc.perform(get("/class-mapping/method"))
+                .andExpect(content().string("class-mapping by path + method"));
     }
 
     @Test
     public void byParameter() throws Exception {
-        this.mockMvc.perform(get("/mapping/parameter?foo=bar"))
-                .andExpect(content().string("Mapped by path + method + presence of query parameter!"));
+        this.mockMvc.perform(get("/class-mapping/parameter?foo=bar"))
+                .andExpect(content().string("class-mapping by path + method + presence of query parameter!"));
     }
 
     @Test
     public void byNotParameter() throws Exception {
-        this.mockMvc.perform(get("/mapping/parameter"))
-                .andExpect(content().string("Mapped by path + method + not presence of query parameter!"));
+        this.mockMvc.perform(get("/class-mapping/parameter"))
+                .andExpect(content().string("class-mapping by path + method + not presence of query parameter!"));
     }
 
     @Test
     public void byHeader() throws Exception {
-        this.mockMvc.perform(get("/mapping/header").header("FooHeader", "foo"))
-                .andExpect(content().string("Mapped by path + method + presence of header!"));
+        this.mockMvc.perform(get("/class-mapping/header").header("FooHeader", "foo"))
+                .andExpect(content().string("class-mapping by path + method + presence of header!"));
     }
 
     @Test
     public void byHeaderNegation() throws Exception {
-        this.mockMvc.perform(get("/mapping/header"))
-                .andExpect(content().string("Mapped by path + method + absence of header!"));
+        this.mockMvc.perform(get("/class-mapping/header"))
+                .andExpect(content().string("class-mapping by path + method + absence of header!"));
     }
 
     @Test
     public void byConsumes() throws Exception {
         this.mockMvc.perform(
-                post("/mapping/consumes")
+                post("/class-mapping/consumes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"foo\": \"bar\", \"fruit\": \"apple\" }".getBytes()))
-                .andExpect(content().string(startsWith("Mapped by path + method + consumable media type (javaBean")));
+                .andExpect(content().string(startsWith("class-mapping by path + method + consumable media type (javaBean")));
     }
 
     @Test
     public void byProducesAcceptJson() throws Exception {
-        this.mockMvc.perform(get("/mapping/produces").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/class-mapping/produces").accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.foo").value("bar"))
                 .andExpect(jsonPath("$.fruit").value("apple"));
     }
 
     @Test
     public void byProducesAcceptXml() throws Exception {
-        this.mockMvc.perform(get("/mapping/produces").accept(MediaType.APPLICATION_XML))
+        this.mockMvc.perform(get("/class-mapping/produces").accept(MediaType.APPLICATION_XML))
                 .andExpect(xpath("/javaBean/foo").string("bar"))
                 .andExpect(xpath("/javaBean/fruit").string("apple"));
     }
@@ -101,14 +102,14 @@ public class MappingControllerTest extends AbstractContextControllerTests {
      */
     @Test
     public void byProducesJsonExtension() throws Exception {
-        this.mockMvc.perform(get("/mapping/produces.json"))
+        this.mockMvc.perform(get("/class-mapping/produces.json"))
                 .andExpect(jsonPath("$.foo").value("bar"))
                 .andExpect(jsonPath("$.fruit").value("apple"));
     }
 
     @Test
     public void byProducesXmlExtension() throws Exception {
-        this.mockMvc.perform(get("/mapping/produces.xml"))
+        this.mockMvc.perform(get("/class-mapping/produces.xml"))
                 .andExpect(xpath("/javaBean/foo").string("bar"))
                 .andExpect(xpath("/javaBean/fruit").string("apple"));
     }

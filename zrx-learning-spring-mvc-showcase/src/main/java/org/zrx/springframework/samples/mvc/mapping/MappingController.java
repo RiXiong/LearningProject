@@ -59,6 +59,7 @@ public class MappingController {
 
     @RequestMapping(value="/mapping/produces", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JavaBean byProducesJson() {
+        System.out.println("Hello World!");
         return new JavaBean();
     }
 

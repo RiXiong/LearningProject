@@ -1,5 +1,6 @@
 package org.zrx.springframework.samples.mvc.mapping;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,47 +20,53 @@ public class ClasslevelMappingController {
 
     @RequestMapping("/path")
     public @ResponseBody String byPath() {
-         return "路径匹配";
+        return "class-mapping by path!";
     }
 
-    @RequestMapping(value = "/path/*", method = RequestMethod.GET)
-    public @ResponseBody String byPathPattern(HttpServletRequest request){
-        return "路径 样式 进行匹配：访问路径URI(" + request.getRequestURI() +")";
+    @RequestMapping(value="/path/*", method=RequestMethod.GET)
+    public @ResponseBody String byPathPattern(HttpServletRequest request) {
+        return "class-mapping by path pattern ('" + request.getRequestURI() + "')";
     }
 
-    @RequestMapping(value = "/method", method = RequestMethod.GET)
+    @RequestMapping(value="/method", method=RequestMethod.GET)
     public @ResponseBody String byMethod() {
-        return " 路径 + 方法进行 匹配:";
+        return "class-mapping by path + method";
     }
 
-    @RequestMapping(value = "/parameter", method = RequestMethod.GET,params = "foo")
+    @RequestMapping(value="/parameter", method=RequestMethod.GET, params="foo")
     public @ResponseBody String byParameter() {
-        return "映射路径+方法+查询参数!";
+        return "class-mapping by path + method + presence of query parameter!";
     }
 
-    @RequestMapping(value = "/parameter", method = RequestMethod.GET,params = "!foo")
-    public @ResponseBody String  byParameterNegation() {
-        return "映射路径+方法+查询 否定参数!";
+    @RequestMapping(value="/parameter", method=RequestMethod.GET, params="!foo")
+    public @ResponseBody String byParameterNegation() {
+        return "class-mapping by path + method + not presence of query parameter!";
     }
 
-    @RequestMapping(value="/header",method = RequestMethod.GET, headers = "foo")
+    @RequestMapping(value="/header", method=RequestMethod.GET, headers="FooHeader=foo")
     public @ResponseBody String byHeader() {
-        return "映射路径 + 方法 + Http头Header参数!";
+        return "class-mapping by path + method + presence of header!";
     }
 
-    @RequestMapping(value = "/notheader", method = RequestMethod.GET, headers = "!foo")
+    @RequestMapping(value="/notheader", method=RequestMethod.GET, headers="!FooHeader")
     public @ResponseBody String byHeaderNegation() {
-        return "映射路径 + 方法 + Http头  缺失Header参数!";
+        return "class-mapping by path + method + absence of header!";
     }
 
-    @RequestMapping(value = "/consumes", method = RequestMethod.POST, consumes = "application/json" )
+
+    @RequestMapping(value="/consumes", method=RequestMethod.POST, consumes="application/json")
     public @ResponseBody String byConsumes(@RequestBody JavaBean javaBean) {
-        return "映射路径  +  方法  +  可消费  媒体类型";
+        return "class-mapping by path + method + consumable media type (javaBean '" + javaBean + "')";
     }
 
-    @RequestMapping(value = "/produces", method = RequestMethod.GET, produces="application/json")
-    public JavaBean byProduces() {
-        return new JavaBean(); // 生产者类型
+    @RequestMapping(value="/produces", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody JavaBean byProduces() {
+        return new JavaBean();
+    }
+
+    @RequestMapping(value="/produces", method=RequestMethod.GET,produces = "application/xml")
+    public @ResponseBody JavaBean byProducesXML() {
+        return new JavaBean();
     }
 
 }

@@ -21,7 +21,7 @@ public class ValidationController {
         if (result.hasErrors()) {
             return "Object has validation errors ";
         } else {
-            return "No error";
+            return "No errors";
         }
     }
 

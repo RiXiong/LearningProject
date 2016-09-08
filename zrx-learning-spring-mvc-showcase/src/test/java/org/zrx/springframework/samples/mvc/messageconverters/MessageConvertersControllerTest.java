@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.zrx.springframework.samples.mvc.AbstractContextControllerTests;
 
 import static org.junit.Assert.*;
@@ -20,25 +18,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * Fynction:    R on 2016/9/4.
+ * Fynction:    R on 2016/9/5.
  * Author:      zhangrixiong
- * DateTime:    2016/9/4 22:39
+ * DateTime:    2016/9/5 21:51
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MessageConvertersControllerTest  extends AbstractContextControllerTests {
 
     private static String URI = "/messageconverters/{action}";
+
     private MockMvc mockMvc;
 
     @Before
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-                      .alwaysExpect(status().isOk()).build();
+    public void setUp() throws Exception {
+         this.mockMvc = webAppContextSetup(this.wac).alwaysExpect(status().isOk()).build();
     }
 
     @Test
     public void readString() throws Exception {
-        this.mockMvc.perform(post(URI,"string").content("foo".getBytes()))
+        this.mockMvc.perform(post(URI, "string").content("foo".getBytes()))
                 .andExpect(content().string("Read string 'foo'"));
     }
 
@@ -52,17 +50,10 @@ public class MessageConvertersControllerTest  extends AbstractContextControllerT
     public void readForm() throws Exception {
         this.mockMvc.perform(
                 post(URI, "form")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("foo", "bar")
-                        .param("fruit", "apple"))
-                        .andExpect(content().string("Read x-www-form-urlencoded: JavaBean {foo=[bar], fruit=[apple]}"));
-    }
-
-    @Test
-    public void writeForm() throws Exception {
-        this.mockMvc.perform(get(URI, "form"))
-                .andExpect(content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(content().string("foo=bar&fruit=apple"));
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("foo", "bar")
+                .param("fruit", "apple"))
+                .andExpect(content().string("Read x-www-form-urlencoded: JavaBean {foo=[bar], fruit=[apple]}"));
     }
 
     private static String XML =
@@ -70,11 +61,20 @@ public class MessageConvertersControllerTest  extends AbstractContextControllerT
                     "<javaBean><foo>bar</foo><fruit>apple</fruit></javaBean>";
 
     @Test
+    public void writeForm() throws Exception {
+        this.mockMvc.perform(
+                 post(URI, "xml")
+                 .contentType(MediaType.APPLICATION_XML)
+                 .content(XML.getBytes()))
+                 .andExpect(content().string("Read from XML: JavaBean {foo=[bar], fruit=[apple]}"));
+    }
+
+    @Test
     public void readXml() throws Exception {
         this.mockMvc.perform(
                 post(URI, "xml")
-                        .contentType(MediaType.APPLICATION_XML)
-                        .content(XML.getBytes()))
+                .contentType(MediaType.APPLICATION_XML)
+                .content(XML.getBytes()))
                 .andExpect(content().string("Read from XML: JavaBean {foo=[bar], fruit=[apple]}"));
     }
 
@@ -107,4 +107,57 @@ public class MessageConvertersControllerTest  extends AbstractContextControllerT
                 .andExpect(jsonPath("$.foo").value("bar"))
                 .andExpect(jsonPath("$.fruit").value("apple"));
     }
+
+    private static String ATOM_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+            "<feed xmlns=\"http://www.w3.org/2005/Atom\"><title>My Atom feed</title></feed>";
+
+    @Test
+    public void readFeed() throws Exception {
+        this.mockMvc.perform(
+                post(URI, "atom")
+                .contentType(MediaType.APPLICATION_ATOM_XML)
+                .content(ATOM_XML.getBytes()))
+                .andExpect(content().string("Read My Atom feed"));
+    }
+
+    @Test
+    public void writeFeed() throws Exception {
+        this.mockMvc.perform(get(URI, "atom").accept(MediaType.APPLICATION_ATOM_XML))
+                .andExpect(content().xml(ATOM_XML));
+    }
+
+    @Test
+    public void readAtom() throws Exception {
+        this.mockMvc.perform(
+                post(URI, "atom")
+                .contentType(MediaType.APPLICATION_ATOM_XML)
+                .content(ATOM_XML.getBytes()))
+                .andExpect(content().string("Read My Atom feed"));
+    }
+
+    @Test
+    public void writeAtom() throws Exception {
+        this.mockMvc.perform(get(URI, "atom").accept(MediaType.APPLICATION_ATOM_XML))
+                .andExpect(content().xml(ATOM_XML));
+    }
+
+    @Test
+    public void readRss() throws Exception {
+        String rss = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <rss version=\"2.0\">" +
+                "<channel><title>My RSS feed</title></channel></rss>";
+        this.mockMvc.perform(
+                post(URI, "rss")
+                .contentType(MediaType.valueOf("application/rss+xml"))
+                .content(rss.getBytes()))
+                .andExpect(content().string("Read My RSS feed"));
+    }
+
+    @Test
+    public void writeRss() throws Exception {
+        String rss = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<rss version=\"2.0\"><channel><title>My RSS feed</title><link>http://localhost:8080/mvc-showcase/rss</link><description>Description</description></channel></rss>";
+        this.mockMvc.perform(get(URI, "rss").accept(MediaType.valueOf("application/rss+xml")))
+                .andExpect(content().xml(rss));
+    }
+
 }
