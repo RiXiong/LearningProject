@@ -25,7 +25,6 @@
         <org.slf4j-version>1.7.12</org.slf4j-version>
     </properties>
 
-
     <dependencies>
         <!-- Spring -->
         <dependency>

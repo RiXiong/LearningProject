@@ -15,5 +15,4 @@ public class SimpleControllerRevisited {
     public @ResponseBody String simple() {
         return "Hello world revisited!";
     }
-
 }
