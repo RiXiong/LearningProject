@@ -10,9 +10,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>zrx-learningproject</name>
-    <url>https://github.com/zhangkaitao/es</url>
+    <url>https://github.com/RiXiong/LearningProject</url>
     <description>个人学习项目</description>
-
 
     <modules>
         <module>zrx-learning-parent</module>
@@ -32,7 +31,7 @@
         <developer>
             <name>ricezhang</name>
             <email>827935210@gmail.com</email>
-            <url>https://github.com/zhangkaitao</url>
+            <url>https://github.com/RiXiong/</url>
             <roles>
                 <role>software engineer</role>
             </roles>
@@ -41,7 +40,7 @@
         <developer>
             <name>RiXiong</name>
             <email>827935210@gmail.com</email>
-            <url>https://github.com/zhangkaitao</url>
+            <url>https://github.com/RiXiong/</url>
             <roles>
                 <role>software engineer</role>
             </roles>
@@ -69,7 +68,7 @@
                 <sendOnSuccess>true</sendOnSuccess>
                 <sendOnWarning>false</sendOnWarning>
                 <configuration>
-                    <address>zhangkaitao0503@gmail.com</address>
+                    <address>827935210@gmail.com</address>
                 </configuration>
             </notifier>
         </notifiers>
