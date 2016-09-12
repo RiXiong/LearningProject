@@ -32,6 +32,7 @@ public class FileUploadController {
     // 表单提交
     @RequestMapping(method=RequestMethod.GET)
     public void fileUploadForm() {
+        System.out.println("Hello World ..... ");
     }
 
     @RequestMapping(method=RequestMethod.POST)
