@@ -12,7 +12,6 @@ import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
 /**
  * Function:    DeferredResultController
  * Author:      zhangrixiong
@@ -27,7 +26,6 @@ public class DeferredResultController {
     private final Queue<DeferredResult<ModelAndView>> mavQueue = new ConcurrentLinkedQueue<DeferredResult<ModelAndView>>();
 
     private final Queue<DeferredResult<String>> exceptionQueue = new ConcurrentLinkedQueue<DeferredResult<String>>();
-
 
     @RequestMapping("/deferred-result/response-body")
     public @ResponseBody DeferredResult<String> deferredResult() {

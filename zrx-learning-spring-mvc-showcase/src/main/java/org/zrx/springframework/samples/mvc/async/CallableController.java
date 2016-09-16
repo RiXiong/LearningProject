@@ -11,12 +11,20 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 import java.util.concurrent.Callable;
 
 
+/**
+ * SpringMVC 学习， 异步调用
+ *
+ */
 @Controller
 @RequestMapping("/async/callable")
 public class CallableController {
 
+    /**
+     * API: {url}/async/callable/response-body
+     * @return
+     */
     @RequestMapping("/response-body")
-    public @ResponseBody   Callable<String> callable() {
+    public @ResponseBody Callable<String> callable() {
           return new Callable<String>() {  // J.U.C
               @Override
               public String call() throws Exception {
@@ -26,6 +34,11 @@ public class CallableController {
           };
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/view")
     public Callable<String> callablewithView(final Model model){
         return new Callable<String>() {

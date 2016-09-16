@@ -74,7 +74,7 @@ public class ConvertControllerTest {
     public void valueOf() throws Exception {
         this.mockMvc.perform(get("/convert/value?value=123456789"))
                 .andExpect(content().string(startsWith(
-                        "Converted value object org.springframework.samples.mvc.convert.SocialSecurityNumber")));
+                        "Converted value object = org.zrx.springframework.samples.mvc.convert.SocialSecurityNumber")));
     }
 
     @Test
