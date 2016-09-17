@@ -25,27 +25,54 @@ public class FormController {
 
     // Invoked on every request
 
+    /**
+     *
+     * @param request
+     * @param model
+     */
     @ModelAttribute
     public void ajaxAttribute(WebRequest request, Model model) {
+        System.out.println("void ajaxAttribute(WebRequest request, Model model)  1");
         model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
     }
 
     // Invoked initially to create the "form" attribute
     // Once created the "form" attribute comes from the HTTP session (see @SessionAttributes)
 
+    /**
+     *
+     * @return
+     */
     @ModelAttribute("formBean")
     public FormBean createFormBean() {
+        System.out.println("FormBean createFormBean()  2");
         return new FormBean();
     }
 
+    /**
+     *
+     */
     @RequestMapping(method=RequestMethod.GET)
     public void form() {
+        System.out.println("void form() 3 ");
     }
 
+    /**
+     *
+     * @param formBean
+     * @param result
+     * @param ajaxRequest
+     * @param model
+     * @param redirectAttrs
+     * @return
+     */
     @RequestMapping(method=RequestMethod.POST)
     public String processSubmit(@Valid FormBean formBean, BindingResult result,
                                 @ModelAttribute("ajaxRequest") boolean ajaxRequest,
                                 Model model, RedirectAttributes redirectAttrs) {
+
+        System.out.println("String processSubmit(  )  ");
+
         if (result.hasErrors()) {
             return null;
         }
