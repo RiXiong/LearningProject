@@ -95,7 +95,8 @@
 		</form:form>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#form").submit(function() {  
+				$("#form").submit(function() {
+					alert($(this).attr("action"));
 					$.post($(this).attr("action"), $(this).serialize(), function(html) {
 						$("#formsContent").replaceWith(html);
 						$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);

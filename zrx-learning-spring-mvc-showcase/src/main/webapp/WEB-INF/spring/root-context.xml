@@ -3,21 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- Root Context: 定义了对其他web组件可见的共享资源 -->
 
     <!--
         CSRF protection. Here we only include the CsrfFilter instead of all of Spring Security.
         See http://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/#csrf for more information on
         Spring Security's CSRF protection
+        CSRF保护. 在这里仅仅定义了 Spring Security 中的CsrfFilter 功能，而不是Spring Security 中的全部功能
     -->
     <bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
         <constructor-arg>
             <bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"/>
         </constructor-arg>
     </bean>
+
     <!--
         Provides automatic CSRF token inclusion when using Spring MVC Form tags or Thymeleaf. See
         http://localhost:8080/#forms and form.jsp for examples
+        提供了自动包含 CSRF token 当使用 Spring MVC Form  tag 或  Thymeleaf 时产生。
+        具体查看 http://localhost:8080/#forms and form.jsp for examples
     -->
     <bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/>
 </beans>

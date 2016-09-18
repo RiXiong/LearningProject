@@ -1,0 +1,6 @@
+{
+  "canTryAgain" : false,
+  "scope" : "SECURITY",
+  "error" : "207",
+  "message" : "Message[AUTHENTICATION_FAILURE]: User token must be authenticated."
+}
