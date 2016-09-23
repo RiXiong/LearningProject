@@ -20,8 +20,7 @@ public class CustomArgumentController {
     }
 
     @RequestMapping(value="/data/custom", method= RequestMethod.GET)
-    public @ResponseBody
-    String custom(@RequestAttribute("foo") String foo) {
+    public @ResponseBody String custom(@RequestAttribute("foo") String foo) {
         return "Got 'foo' request attribute value '" + foo + "'";
     }
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Function:    NestedBean
+ * Function:    NestedBean 为 JavaBean中的对象
  * Author:      zhangrixiong
  * DateTime:    2016/8/22 17:44
  */

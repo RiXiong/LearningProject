@@ -22,16 +22,20 @@ public class JavaBean {
     private String masked;
 
     // list will auto-grow as its dereferenced e.g. list[0]=value
+    // list 将会 自动 增长， 当他被间接引用的时候， 如：list[0]=value
     private List<Integer> list;
 
     // annotation type conversion rule will be applied to each list element
+    // 注解类型 反转规则 将会被应用到 每一个 list 元素中
     @DateTimeFormat(iso=ISO.DATE)
     private List<Date> formattedList;
 
     // map will auto-grow as its dereferenced e.g. map[key]=value
+    // map 将会 自动增长 当 他被间接引用的时候，如：map[key]=value
     private Map<Integer, String> map;
 
     // nested will be set when it is referenced e.g. nested.foo=value
+    // netsted 实例 将会被设置， 当 他被引用时，如： nested.foo=value
     private NestedBean nested;
 
     public Integer getPrimitive() {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/data")
 public class RequestDataController {
+
     @RequestMapping(value="param", method=RequestMethod.GET)
     public @ResponseBody String withParam(@RequestParam String foo) {
         return "Obtained 'foo' query parameter value '" + foo + "'";

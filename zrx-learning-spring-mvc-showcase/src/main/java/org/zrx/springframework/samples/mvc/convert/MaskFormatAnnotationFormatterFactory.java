@@ -11,22 +11,38 @@ import org.springframework.format.Parser;
 import org.springframework.format.Printer;
 
 /**
- * Function:    MaskFormatAnnotationFormatterFactory 实现控制反转
+ * Function:    MaskFormatAnnotationFormatterFactory 实现控制反转， 对{@link MaskFormat} 进行解析
  * Author:      zhangrixiong
  * DateTime:    2016/8/22 17:43
  */
 public class MaskFormatAnnotationFormatterFactory implements AnnotationFormatterFactory<MaskFormat> {
 
+    /**
+     * 被注解的字段类型，字段的类型。
+     * @return
+     */
     public Set<Class<?>> getFieldTypes() {
         Set<Class<?>> fieldTypes = new HashSet<Class<?>>(1, 1);
         fieldTypes.add(String.class);
         return fieldTypes;
     }
 
+    /**
+     * 解析器解析提交的值的字段, annotation(自定义的注解 eg MaskFormat, 字段属性名称：fieldType)
+     * @param annotation
+     * @param fieldType
+     * @return
+     */
     public Parser<?> getParser(MaskFormat annotation, Class<?> fieldType) {
         return new MaskFormatter(annotation.value());
     }
 
+    /**
+     *
+     * @param annotation
+     * @param fieldType
+     * @return
+     */
     public Printer<?> getPrinter(MaskFormat annotation, Class<?> fieldType) {
         return new MaskFormatter(annotation.value());
     }

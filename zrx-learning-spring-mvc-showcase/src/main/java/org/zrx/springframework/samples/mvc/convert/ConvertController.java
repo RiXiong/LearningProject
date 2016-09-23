@@ -80,19 +80,19 @@ public class ConvertController {
     }
 
     /**
-     * Api: {url}/convert/bean?primitive=3
+     * Api: {url}/convert/bean?primitive=3  // JavaBean 对象实例中的 的 整形常量
      *     or
-     * Api: {url}/convert/bean?date=2010-07-
+     * Api: {url}/convert/bean?date=2010-07-01  // JavaBean 对象实例中的 时间 对象常量
      *    or
-     * Api: {url}/convert/bean?masked=(205) 333-3333
+     * Api: {url}/convert/bean?masked=(205) 333-3333  // JavaBean 对象中实例中的 String 类型 并且通过注解 限制 String 格式
      *    or
-     * Api: {url}/convert/bean?list[0]=1&list[1]=2&list[2]=3
+     * Api: {url}/convert/bean?list[0]=1&list[1]=2&list[2]=3 // JavaBean 对象实例中， list 类型 参数
      *   or
-     * Api: {url}/convert/bean?formattedList[0]=2010-07-04&formattedList[1]=2011-07-04
+     * Api: {url}/convert/bean?formattedList[0]=2010-07-04&formattedList[1]=2011-07-04  // 通过注解反转 JavaBean 中的对象 formattedList，限定时间格式
      *   or
-     * Api: {url}/convert/bean?map[0]=apple&map[1]=pear
+     * Api: {url}/convert/bean?map[0]=apple&map[1]=pear  // 对JavaBean 对象实例中的， map 对象装配实例
      *    or
-     * Api: {url}/convert/bean?nested.foo=bar&nested.list[0].foo=baz&nested.map[key].list[0].foo=bip
+     * Api: {url}/convert/bean?nested.foo=bar&nested.list[0].foo=baz&nested.map[key].list[0].foo=bip // 对JavaBean 组合对象装配实例参数
      *
      * @param bean
      * @return

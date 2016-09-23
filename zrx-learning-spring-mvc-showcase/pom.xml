@@ -21,6 +21,7 @@
         <org.aspectj-version>1.8.1</org.aspectj-version>
         <org.slf4j-version>1.7.12</org.slf4j-version>
     </properties>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -199,6 +200,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <repositories>
         <!-- For testing against latest Spring snapshots -->
         <repository>
@@ -298,6 +300,14 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.0.6.v20130930</version>
                 <configuration>
+                    <!-- 覆盖jetty.xml 配置 -->
+                    <!--<jettyXml>${project.basedir}/src/main/resources/jetty.xml</jettyXml>-->
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <stopPort>9966</stopPort>
+                    <stopKey>foo</stopKey>
+                    <httpConnector>
+                        <port>9090</port>
+                    </httpConnector>
                     <webApp>
                         <contextPath>/${project.artifactId}</contextPath>
                     </webApp>
@@ -305,4 +315,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
