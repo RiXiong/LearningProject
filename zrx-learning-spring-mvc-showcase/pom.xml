@@ -20,6 +20,7 @@
         <org.springframework.security-version>4.0.1.RELEASE</org.springframework.security-version>
         <org.aspectj-version>1.8.1</org.aspectj-version>
         <org.slf4j-version>1.7.12</org.slf4j-version>
+        <gson-version>2.7</gson-version>
     </properties>
 
     <dependencies>
@@ -122,6 +123,8 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.5.3</version>
         </dependency>
+
+
 
         <!-- Rome Atom+RSS -->
         <dependency>

@@ -56,6 +56,8 @@
 	-->
 	<beans:import resource="controllers.xml" />
 
+	<beans:import resource="aop.xml" />
+
 	<task:annotation-driven />
 
 </beans:beans>

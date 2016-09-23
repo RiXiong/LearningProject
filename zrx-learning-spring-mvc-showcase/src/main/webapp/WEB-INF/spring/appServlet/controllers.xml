@@ -10,12 +10,11 @@
 	<!--  当路径为 "/" 时， 默认转发到 "home.jsp"页面上   -->
 	<mvc:view-controller path="/" view-name="home"/>
 
-
 	<!--
-	    如果配置了<context:component-scan>那么<context:annotation-config/>标签就可以不用再xml中配置了
-	    use-default-filters="true" 默认为true,
-	    就意味着会扫描指定包下的全部的标有@Component的类，并注册成bean.也就是@Component的子注解@Service,@Reposity等。扫描粒度大。
-	    use-default-filters="true" 默认为false,
+		如果配置了<context:component-scan>那么<context:annotation-config/>标签就可以不用再xml中配置了
+		use-default-filters="true" 默认为true,
+		就意味着会扫描指定包下的全部的标有@Component的类，并注册成bean.也就是@Component的子注解@Service,@Reposity等。扫描粒度大。
+		use-default-filters="true" 默认为false,
 	-->
 	<context:component-scan base-package="org.zrx.springframework.samples.mvc" >
 			<!--
