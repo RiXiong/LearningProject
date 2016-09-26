@@ -15,5 +15,5 @@
 
         <!--  日志Bean  -->
         <bean class="org.zrx.springframework.aop.LogAspect" />
-
+        <bean class="org.zrx.springframework.aop.BaseAspect" />
 </beans>
