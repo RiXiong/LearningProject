@@ -1,7 +1,6 @@
 package org.zrx.springframework.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import java.text.SimpleDateFormat;

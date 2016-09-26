@@ -10,6 +10,8 @@
         <!-- 激活组件扫描功能,在包cn.ysh.studio.spring.aop及其子包下面自动扫描通过注解配置的组件 -->
         <context:component-scan base-package="org.zrx.springframework.aop"/>
 
+        <context:component-scan base-package="org.zrx.springframework.samples.service"/>
+
         <!--  激活自动代理功能， 默认为 false 不开启动态代理  -->
         <aop:aspectj-autoproxy proxy-target-class="true"/>
 

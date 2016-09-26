@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
+
 
 /**
  * Function:    DeferredResultController
@@ -57,8 +59,12 @@ public class DeferredResultController {
         return new DeferredResult<String>(1000L, "Deferred result after timeout");
     }
 
+    @Resource
+    org.zrx.springframework.samples.service.HelloService helloService;
+
     @Scheduled(fixedRate=2000)
     public void processQueues() {
+        helloService.hello();
         for (DeferredResult<String> result : this.responseBodyQueue) {
             result.setResult("Deferred result");
             this.responseBodyQueue.remove(result);
