@@ -24,7 +24,7 @@
 
 	<!--
 	   Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory
-	   处理Http GET 请求， 获取 /resources/** 下面的静态文件资源
+	   处理Http GET 请求， 获取 /resources/** 下面的静态文件资源 即 webapp/resources
 	-->
 	<resources mapping="/resources/**"  location="/resources/" />
 
@@ -52,12 +52,13 @@
 
 	<!--
 	    Imports user-defined @Controller beans that process client requests
-	     引入 用户默认处理 Controller 控制层 客户端 请求处理
+	     引入用户默认处理 Controller 控制层 客户端 请求处理
 	-->
 	<beans:import resource="controllers.xml" />
 
-	<beans:import resource="aop.xml" />
+	<beans:import resource="aop.xml"/>
 
+	<!--  声明开启任务定时器注解  -->
 	<task:annotation-driven />
 
 </beans:beans>

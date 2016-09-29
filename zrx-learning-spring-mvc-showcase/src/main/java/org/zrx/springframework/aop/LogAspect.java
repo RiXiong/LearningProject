@@ -17,6 +17,20 @@ public class LogAspect {
     private long startTimeMillis = 0; // 开始时间
     private long endTimeMillis = 0; // 结束时间
 
+    //@Pointcut("execution(* com.test.spring.aop.pointcutexp..JoinPointObjP2.*(..))")
+    //@Pointcut("within(com.test.spring.aop.pointcutexp..*)")
+    //@Pointcut("this(com.test.spring.aop.pointcutexp.Intf)")
+    //@Pointcut("target(com.test.spring.aop.pointcutexp.Intf)")
+    //@Pointcut("@within(org.springframework.transaction.annotation.Transactional)")
+    //@Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
+    //    @Pointcut("args(String)")
+    //    public void pointcut1() {
+    //    }
+    //    @Before(value = "pointcut1()")
+    //    public void beforeAdvice() {
+    //        System.out.println("pointcut1 @Before...");
+    //    }
+
     @Before("execution(* org.zrx.springframework.samples.mvc..*.*(..))")
     public void doBeforeInServiceLayer(JoinPoint joinPoint) {
         System.out.println("================================Hello World!  start!");

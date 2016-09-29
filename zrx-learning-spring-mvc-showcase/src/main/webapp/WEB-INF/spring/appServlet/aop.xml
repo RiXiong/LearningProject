@@ -15,7 +15,7 @@
         <!--  激活自动代理功能， 默认为 false 不开启动态代理  -->
         <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-        <!--  日志Bean  -->
-        <bean class="org.zrx.springframework.aop.LogAspect" />
-        <bean class="org.zrx.springframework.aop.BaseAspect" />
+        <!--&lt;!&ndash;  日志Bean  &ndash;&gt;-->
+        <!--<bean class="org.zrx.springframework.aop.LogAspect" />-->
+        <!--<bean class="org.zrx.springframework.aop.BaseAspect" />-->
 </beans>

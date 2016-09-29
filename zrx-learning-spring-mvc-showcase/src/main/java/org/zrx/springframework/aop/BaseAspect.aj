@@ -23,7 +23,7 @@ public aspect BaseAspect {
     pointcut HelloServicePointCut() : execution(* org.zrx.springframework.samples.service..*.*(..));
 
     before() : HelloWorldPointCut() {
-        System.out.println(thisJoinPoint.getSignature() + "Hello world  对接口进行访问统计和日志输出 " + thisJoinPoint.getSourceLocation());
+        System.out.println( "Hello world  对接口进行访问统计和日志输出 =====" + thisJoinPoint.getSourceLocation());
     }
 
 //    after() returning (Object o): HelloWorldPointCut() {
@@ -33,13 +33,14 @@ public aspect BaseAspect {
 //        System.out.println("Threw an exception: 执行方法后，抛出异常通知！ " + e);
 //    }
     after(): HelloWorldPointCut(){
-        System.out.println( thisJoinPoint.getSignature() + "Returned or threw an Exception  返回值或 抛出异常！" + thisJoinPoint.getSourceLocation());
+        System.out.println(  "Returned or threw an Exception  返回值或 抛出异常！======" + thisJoinPoint.getSourceLocation());
+        System.out.println( thisJoinPoint.getSignature() );
     }
 
     Object around() : HelloServicePointCut(){
         System.out.println("Entering : ");
         Object ob =  proceed();
-        System.out.println( " around()  返回值或 抛出异常！" + thisJoinPoint.getSourceLocation());
+        System.out.println( " around()  ！============" + thisJoinPoint.getSourceLocation());
         return ob;
     }
 

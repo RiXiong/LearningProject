@@ -20,7 +20,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- csrfFilter 过滤器，防止跨站提交攻击 token -->
+    <!-- csrfFilter 过滤器，防止跨站提交攻击 token csrf 原理参考文章：http://www.freebuf.com/articles/web/11840.html  -->
     <filter>
         <filter-name>csrfFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

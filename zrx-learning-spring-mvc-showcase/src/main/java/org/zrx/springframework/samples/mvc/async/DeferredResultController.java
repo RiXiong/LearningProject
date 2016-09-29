@@ -11,22 +11,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 
 /**
- * Function:    DeferredResultController
+ * Function:    DeferredResultController 延期结果控制器
  * Author:      zhangrixiong
  * DateTime:    2016/8/22 17:19
+ * <p>
+ *     延迟结果控制器，
+ *     Spring在schedule这块支持JDK Timer、concurrent、quartz三种，
+ *     这三种schedule都是基于scheduler->trigger->job的基本流程，
+ *     因此spring通过TimerFactoryBean、ScheduledExecutorFactoryBean和SchedulerFactoryBean分别实现JDK Timer、concurrent和quartz的基本流程。
+ *
+ *     顺着scheduler->trigger->job的思路，Spring又分别对JDK Timer、concurrent、quartz的trigger进行了封装，
+ *     暴露出时间调度的配置参数，三种封装类分别为ScheduledTimerTask、ScheduledExecutorTask和CronTriggerBean+SimpleTriggerBean。
+ *     三种trigger封装类分别根据实现机制的特点暴露出时间调度配置并串联起scheduler和具体job任务
+ * </p>
  */
 @Controller
 @RequestMapping("/async")
 public class DeferredResultController {
 
+    // responseBodyQueue 请求队列
     private final Queue<DeferredResult<String>> responseBodyQueue = new ConcurrentLinkedQueue<DeferredResult<String>>();
 
+    // model And View 视图队列
     private final Queue<DeferredResult<ModelAndView>> mavQueue = new ConcurrentLinkedQueue<DeferredResult<ModelAndView>>();
 
+    // exceptionQueue 异常队列
     private final Queue<DeferredResult<String>> exceptionQueue = new ConcurrentLinkedQueue<DeferredResult<String>>();
 
     @RequestMapping("/deferred-result/response-body")
@@ -59,7 +72,10 @@ public class DeferredResultController {
         return new DeferredResult<String>(1000L, "Deferred result after timeout");
     }
 
-    @Resource
+    /**
+     * 业务层的切入点
+     */
+    @Inject
     org.zrx.springframework.samples.service.HelloService helloService;
 
     @Scheduled(fixedRate=2000)

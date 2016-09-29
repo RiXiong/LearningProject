@@ -18,8 +18,6 @@
     </bean>
 
     <!--
-        Provides automatic CSRF token inclusion when using Spring MVC Form tags or Thymeleaf. See
-        http://localhost:8080/#forms and form.jsp for examples
         提供了自动包含 CSRF token 当使用 Spring MVC Form  tag 或  Thymeleaf 时产生。
         具体查看 http://localhost:8080/#forms and form.jsp for examples
     -->
